@@ -1,10 +1,10 @@
 #summary A specification of the Vomp-VDR protocol.
 #labels Phase-Design,Vomp,VDR
 
-	Vomp Protocol for communication between Vomp Client and Server
+	=Vomp Protocol for communication between Vomp Client and Server=
         ===============================================================
 
-Introduction
+==Introduction==
 =============
 
 The Video Disk Recorder (VDR http://www.cadsoft.de/vdr/) supports a 
@@ -21,20 +21,20 @@ server, version 0.3.0.
 
 The Vomp protocol consists of the following parts:
 
-* Server detection
-* Request-Response protocol
-* Streaming protocol
-* Keep Alive protocol
+ * Server detection
+ * Request-Response protocol
+ * Streaming protocol
+ * Keep Alive protocol
 
 Server detection uses UDP messaging, whereas Request/Response, Streaming and Keep Alive messages are exchanged over TCP connection. The TCP connection is denoted a Vomp channel in subsequent text.
 
 Multiple clients are supported by the protocol as well as the Vomp server implementation.
 
-Server detection
+==Server detection==
 ================
 
-- client broadcasts UDP to Address 255.255.255.255. Source and destination ports are 3024. Payload is 4 octets "VOMP" = 0x56 0x4f 0x4d 0x50
-- Server responds to Client Address UDP port 3024 (always regardless of source port in previous broadcast.) Payload is 12 octets containing server name. Padding is NULL.
+ # client broadcasts UDP to Address 255.255.255.255. Source and destination ports are 3024. Payload is 4 octets "VOMP" = 0x56 0x4f 0x4d 0x50
+ #Server responds to Client Address UDP port 3024 (always regardless of source port in previous broadcast.) Payload is 12 octets containing server name. Padding is NULL.
 
 NOTE!
 Current Server (Version 0.3.0) does not support client and server on the same Linux 
@@ -45,13 +45,14 @@ instead of:
       ds.send(ds.getFromIPA(),3024, serverName, strlen(serverName));
 
 
-- Client establishes a TCP connection to Server. Destination IP Address is taken from UDP Unicast packet from server. Destination TCP port is 3024.
+ # Client establishes a TCP connection to Server. Destination IP Address is taken from UDP Unicast packet from server. Destination TCP port is 3024.
 
 
 
-Request-Response protocol
+==Request-Response protocol==
 =========================
 
+{{{
 /* Packet format for a request:
 
 4 bytes = Channel ID = 1 (Request/Response channel)
@@ -382,13 +383,15 @@ Media protocol extensions
       GetLanguageList();
      34:
       GetLanguageContent();
+}}}
 
-Playing a recording
---------------------
+==Playing a recording==
+
 OpenRecording will will enable the server to send blocks of data of the opened recording. The client needs to repeatedly send GetBlock(Position,AmountOfData) to receive to entire Recording.
 
 Mediainfo reports the following about the Recording 
 
+{{{
 General #0
 Complete name        : \\NAS1\Qdownload\recordings_play-8.yaws
 Format               : MPEG-2 Program
@@ -408,12 +411,13 @@ Frame rate           : 25.000 fps
 Standard             : PAL
 Chroma               : 4:2:0
 Interlacement        : Top Field First
+}}}
 
-Streaming protocol
-=========================
+==Streaming protocol==
 
-Packet format for a stream packet:
------------------------------------
+
+=== Packet format for a stream packet ===
+
 4 bytes = Channel ID = 2 (stream channel)
 4 bytes = Stream ID (from requestID)
 4 bytes = Code ( 0 = stream, 1= stream_end)
@@ -426,17 +430,18 @@ The client needs to send a Keep Alive mesage every 15 seconds. The Vomp channel 
 The stream will stop when the client sends StopStreaming.
 
 Mediainfo reports the following about the Live TV stream.
-
+{{{
 General #0
 Complete name        : \\NAS1\Qdownload\output.mpg
 Format               : MPEG-1 Transport
 Format/Family        : MPEG-1
 File size            : 71.4 MiB
 
+}}}
 
-Keep Alive protocol
-=========================
-Keep Alive (KA) Channel:
+==Keep Alive protocol==
+
+Keep Alive (KA) Channel
 
 Request:
 4 bytes = Channel ID = 3 
@@ -449,7 +454,7 @@ Response:
 
 
 Miscellaneous notes
-========================
+
 
 For every video frame:
 {

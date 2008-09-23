@@ -1,0 +1,36 @@
+<erl>
+
+-include("vomp_protocol.hrl").
+
+show_recordings() ->
+%%     TODO Servers = vomp_protocol:probe_for_servers(),
+%%     {Address,Port,_Name} = hd(Servers),
+    Address = {192,168,1,92},
+    Port = 3024,
+    {ok,VompChannel} = vomp_channel:create(Address,Port),
+    {ok, _Response1} = vomp_protocol:login(VompChannel),
+    {ok, RecordingsResp} = vomp_protocol:get_recordings(VompChannel),
+    Recordings = RecordingsResp#get_recordings_response.recordings,
+    lists:map(fun(Recording)->
+		      {tr, [],[{td, [], {a,[{href,pelle}],Recording#recording.name}}]} end,Recordings).
+
+
+out(A) ->
+    [{ssi, "HEAD","%%",[]},
+     {ehtml,
+      [{br},
+      {table, [{bgcolor, "cyan"},{align,"center"}],
+       [
+	show_recordings()
+       ]
+      }]
+     } 
+      ,
+     {ssi, "END2",[],[]}].
+
+
+
+
+</erl>
+
+

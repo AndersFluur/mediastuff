@@ -1,0 +1,71 @@
+<erl>
+
+% Just started
+out(A) ->
+    YawsPid = self(),
+    login(YawsPid),
+    {streamcontent, "video/mp1t", <<>>}.
+
+
+      
+start_streaming_receiver(VompChannel, YawsPid) ->
+    
+    Pid = spawn(fun() ->
+			vomp_channel:stream_client_add(VompChannel),
+			streaming_receiver_loop1(VompChannel,0, YawsPid)
+		end),
+    {ok,Pid}.
+streaming_receiver_loop1(VompChannel,Counter, YawsPid) ->
+    receive
+	{stream, Data} ->
+            yaws_api:stream_chunk_deliver(YawsPid, Data),
+	    streaming_receiver_loop1(VompChannel,Counter+1, YawsPid);
+	stream_end ->
+            yaws_api:stream_chunk_end(YawsPid),
+	    io:format("Stream end Counter = ~p~n",[Counter]),
+            exit(normal);
+	counter ->
+	    io:format("Counter = ~p~n",[Counter+1]),
+	    streaming_receiver_loop1(VompChannel,Counter, YawsPid);
+	stop_streaming  ->
+	    vomp_protocol:stop_streaming(VompChannel);
+
+	Else ->
+				
+	    io:format(" Got else: ~p~n",[Else]),
+	    vomp_protocol:stop_streaming(VompChannel)
+	    
+	    
+    after 3000 ->
+            yaws_api:stream_chunk_end(YawsPid),
+	    io:format("Timeout in receiver~n",[])
+	    
+    end.
+	    
+start_keep_alive_sender(VompChannel) ->
+    Pid = spawn(fun() -> keep_alive_sender_loop(VompChannel) end),
+    {ok,Pid}.
+keep_alive_sender_loop(VompChannel) ->   
+    vomp_channel:keep_alive_client_add(VompChannel),
+    keep_alive_sender_loop1(VompChannel,0).
+keep_alive_sender_loop1(VompChannel,Counter) ->
+    vomp_protocol:send_keep_alive(VompChannel),
+    receive
+	after 15000 ->
+		keep_alive_sender_loop1(VompChannel,Counter+1)    
+	end.
+
+login(YawsPid) ->
+    Servers = vomp_channel:probe_for_servers(1),
+    {Address,Port,_Name} = hd(Servers),
+    {ok,VompChannel} = vomp_channel:create(Address,Port),
+    {ok, _Resonse} = vomp_protocol:login(VompChannel),
+
+    start_keep_alive_sender(VompChannel),
+
+    {ok, _Pid} = start_streaming_receiver(VompChannel, YawsPid),  
+    vomp_protocol:start_streaming_channel(VompChannel,ChannelNumber=7),
+    {ok, _Pid}.    
+
+
+</erl>

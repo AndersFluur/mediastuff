@@ -1,0 +1,117 @@
+
+http_driver.erl,2777
+-module(http_driver).http_driver1,0
+start(Port, Fun, Max) ->start8,125
+server(Port, Fun, Max) ->server11,199
+input_handler(Socket, Fun) ->input_handler17,341
+relay(Socket, Server, State) ->relay25,595
+parse_request({header, Buff}, Socket, Server, Data) ->parse_request47,1251
+parse_request({post, Buff, Len, X}, Socket, Server, Data) ->parse_request54,1484
+got_header(Socket, Server, Header, After) ->got_header67,1957
+collect_chunk(0,New,Buf)      -> {yes, reverse(Buf), New};collect_chunk86,2542
+collect_chunk(N, [H|T], Buff) -> collect_chunk(N-1,T,[H|Buff]);collect_chunk87,2601
+collect_chunk(N, [], Buff)    -> {no, Buff, N}.collect_chunk88,2665
+scan_header([$\n|T], [$\r,$\n,$\r|L]) -> {yes, reverse(L), T};scan_header90,2714
+scan_header([H|T],  L)                -> scan_header(T, [H|L]);scan_header91,2777
+scan_header([], L)                    -> {no, L}.scan_header92,2841
+classify(FileName) ->classify98,2972
+header(text) -> header113,3228
+header(html) -> header115,3315
+header(jpg)  -> header117,3402
+header(gif)  -> header119,3490
+header({redirect,To}) ->header121,3577
+powered_by() ->powered_by125,3695
+content_type(X) ->content_type128,3745
+parse_header(Str) ->parse_header133,3874
+make_return_value({{Op,Vsn,{URI,Args}}, Env}) ->make_return_value140,4106
+content_length([{"content-length",Str}|T]) ->content_length144,4209
+content_length([_|T]) -> content_length146,4281
+content_length([]) -> content_length148,4330
+urlencoded2str([$%,Hi,Lo|T]) -> [decode_hex(Hi, Lo)|urlencoded2str(T)];urlencoded2str151,4361
+urlencoded2str([$+|T])       -> [$ |urlencoded2str(T)];urlencoded2str152,4433
+urlencoded2str([H|T])        -> [H|urlencoded2str(T)];urlencoded2str153,4489
+urlencoded2str([])           -> [].urlencoded2str154,4544
+isolate_arg(Str) -> isolate_arg(Str, []).isolate_arg157,4582
+isolate_arg([$:,$ |T], L) -> {httpd_util:to_lower(reverse(L)), T};isolate_arg159,4625
+isolate_arg([H|T], L)     -> isolate_arg(T, [H|L]).isolate_arg160,4692
+decode_hex(Hex1, Hex2) ->decode_hex164,4763
+hex2dec(X) when X >=$0, X =<$9 -> X-$0;hex2dec167,4828
+hex2dec($A) -> 10;hex2dec168,4868
+hex2dec($B) -> 11;hex2dec169,4887
+hex2dec($C) -> 12;hex2dec170,4906
+hex2dec($D) -> 13;hex2dec171,4925
+hex2dec($E) -> 14;hex2dec172,4944
+hex2dec($F) -> 15;hex2dec173,4963
+hex2dec($a) -> 10;hex2dec174,4982
+hex2dec($b) -> 11;hex2dec175,5001
+hex2dec($c) -> 12;hex2dec176,5020
+hex2dec($d) -> 13;hex2dec177,5039
+hex2dec($e) -> 14;hex2dec178,5058
+hex2dec($f) -> 15.hex2dec179,5077
+parse_request(Str) ->parse_request181,5097
+parse_vsn("HTTP/1.0") -> {1,0};parse_vsn192,5339
+parse_vsn(X) -> X.parse_vsn193,5371
+parse_uri(URI) ->parse_uri199,5479
+parse_uri_args(Args) ->parse_uri_args207,5622
+
+ssdp.erl,2765
+-module(ssdp).ssdp1,0
+start(Port, Fun, Max) ->start8,118
+server(Port, Fun, Max) ->server11,192
+input_handler(Socket, Fun) ->input_handler14,280
+relay(Socket, Server, State) ->relay33,887
+parse_request({header, Buff}, Socket, Server, Data) ->parse_request55,1543
+parse_request({post, Buff, Len, X}, Socket, Server, Data) ->parse_request62,1776
+got_header(Socket, Server, Header, After) ->got_header75,2249
+collect_chunk(0,New,Buf)      -> {yes, reverse(Buf), New};collect_chunk94,2834
+collect_chunk(N, [H|T], Buff) -> collect_chunk(N-1,T,[H|Buff]);collect_chunk95,2893
+collect_chunk(N, [], Buff)    -> {no, Buff, N}.collect_chunk96,2957
+scan_header([$\n|T], [$\r,$\n,$\r|L]) -> {yes, reverse(L), T};scan_header98,3006
+scan_header([H|T],  L)                -> scan_header(T, [H|L]);scan_header99,3069
+scan_header([], L)                    -> {no, L}.scan_header100,3133
+classify(FileName) ->classify106,3264
+header(text) -> header121,3520
+header(html) -> header123,3607
+header(jpg)  -> header125,3694
+header(gif)  -> header127,3782
+header({redirect,To}) ->header129,3869
+powered_by() ->powered_by133,3987
+content_type(X) ->content_type136,4037
+parse_header(Str) ->parse_header141,4166
+make_return_value({{Op,Vsn,{URI,Args}}, Env}) ->make_return_value148,4398
+content_length([{"content-length",Str}|T]) ->content_length152,4501
+content_length([_|T]) -> content_length154,4573
+content_length([]) -> content_length156,4622
+urlencoded2str([$%,Hi,Lo|T]) -> [decode_hex(Hi, Lo)|urlencoded2str(T)];urlencoded2str159,4653
+urlencoded2str([$+|T])       -> [$ |urlencoded2str(T)];urlencoded2str160,4725
+urlencoded2str([H|T])        -> [H|urlencoded2str(T)];urlencoded2str161,4781
+urlencoded2str([])           -> [].urlencoded2str162,4836
+isolate_arg(Str) -> isolate_arg(Str, []).isolate_arg165,4874
+isolate_arg([$:,$ |T], L) -> {httpd_util:to_lower(reverse(L)), T};isolate_arg167,4917
+isolate_arg([H|T], L)     -> isolate_arg(T, [H|L]).isolate_arg168,4984
+decode_hex(Hex1, Hex2) ->decode_hex172,5055
+hex2dec(X) when X >=$0, X =<$9 -> X-$0;hex2dec175,5120
+hex2dec($A) -> 10;hex2dec176,5160
+hex2dec($B) -> 11;hex2dec177,5179
+hex2dec($C) -> 12;hex2dec178,5198
+hex2dec($D) -> 13;hex2dec179,5217
+hex2dec($E) -> 14;hex2dec180,5236
+hex2dec($F) -> 15;hex2dec181,5255
+hex2dec($a) -> 10;hex2dec182,5274
+hex2dec($b) -> 11;hex2dec183,5293
+hex2dec($c) -> 12;hex2dec184,5312
+hex2dec($d) -> 13;hex2dec185,5331
+hex2dec($e) -> 14;hex2dec186,5350
+hex2dec($f) -> 15.hex2dec187,5369
+parse_request(Str) ->parse_request189,5389
+parse_vsn("HTTP/1.0") -> {1,0};parse_vsn200,5631
+parse_vsn(X) -> X.parse_vsn201,5663
+parse_uri(URI) ->parse_uri207,5771
+parse_uri_args(Args) ->parse_uri_args215,5914
+
+udp_mcast.erl,176
+-module(udp_mcast).udp_mcast3,77
+open(Ip,Port) ->open8,156
+close(S) -> gen_udp:close(S).close22,515
+start(Ip,Port,module)    ->start24,546
+stop({S,Pid}) ->stop30,684

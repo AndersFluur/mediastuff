@@ -1,0 +1,29 @@
+<erl>
+
+
+out(A) ->
+    [%{ssi, "HEAD","%%",[]},
+     {ehtml,
+      [{br},
+      {table, [{bgcolor, "white"},{align,"center"}],
+       [{tr, [],
+	[{td, [], {a, [{href,tv_channel_view.yaws},{vod,""}], "1. Live TV"}}]}
+       ,{tr, [],
+	[{td, [], {a, [{href,radio_channel_view.yaws}], "2. Radio"}}]}
+       ,{tr, [],
+	[{td, [], {a, [{href,recordings_view.yaws}], "3. Recordings"}}]}
+       ,{tr, [],
+	[{td, [], {a, [{href,recordings_play.yaws},{vod,""}], "4. Play"}}]}
+       ,{tr, [],
+	[{td, [], {a, [{href,test_stuff.yaws}], "5. Test"}}]}
+       ]
+      }]
+     } 
+      ].
+    % {ssi, "END2",[],[]}].
+
+
+</erl>
+
+
+

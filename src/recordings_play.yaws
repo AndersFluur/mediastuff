@@ -1,0 +1,54 @@
+<erl>
+
+% Just started
+out(A) ->
+    YawsPid = self(),
+    login(YawsPid),
+    {streamcontent, "video/mpeg", <<>>}.
+
+      
+start_recording_receiver(VompChannel,FileName, YawsPid) ->
+    io:format("VompChannel=~p,FileName=~p, YawsPid=~p  ~n",[VompChannel,FileName, YawsPid]),
+    Pid = spawn(fun() ->recording_receiver_loop(VompChannel,FileName, YawsPid)
+		end),
+    {ok,Pid}.
+recording_receiver_loop(VompChannel,FileName, YawsPid) ->   
+    io:format("VompChannel=~p,FileName=~p, YawsPid=~p = ~n",[VompChannel,FileName, YawsPid]),
+    vomp_channel:req_resp_client_add(VompChannel),
+    {ok,LengthBytes,LengthFrames} = vomp_protocol:open_recording(VompChannel,FileName),
+ 	    io:format("LengthBytes,LengthFrames = ~p,~p~n",[LengthBytes,LengthFrames]),
+   
+    recording_receiver_loop1(VompChannel,_Counter=0,LengthBytes, YawsPid).
+
+recording_receiver_loop1(VompChannel,Counter,LengthBytes, YawsPid) ->
+    case vomp_protocol:get_block(VompChannel,Counter*4096,4096) of
+	{ok,Data} ->
+            case yaws_api:stream_chunk_deliver_blocking(YawsPid, Data) of
+		{error,{ypid_crash,normal}} ->
+		    io:format("client closed stream! Counter=~p,~n",[Counter]);
+		ok ->
+		    recording_receiver_loop1(VompChannel,Counter+1,LengthBytes, YawsPid)
+	    end;
+	 end_of_stream ->
+ 	    io:format("end_of_stream Counter=~p,~n",[Counter]),
+            yaws_api:stream_chunk_end(YawsPid);
+	 Else ->
+ 	    io:format("Got Else=~p ,Counter=~p~n",[Else,Counter])
+    
+    end.
+	    
+
+login(YawsPid) ->
+    Servers = vomp_channel:probe_for_servers(1),
+    {Address,Port,_Name} = hd(Servers),
+    {ok,VompChannel} = vomp_channel:create(Address,Port),
+    {ok, _Resonse} = vomp_protocol:login(VompChannel),
+
+    io:format("Logged In ~n",[]),
+
+    FileName = "/var/media/vdr/Oraklen/2008-08-18.11.55.99.99.rec",
+    {ok, Pid} = start_recording_receiver(VompChannel,FileName, YawsPid),
+    io:format("start_recording_receiver Pid= ~p~n",[Pid]).    
+
+
+</erl>

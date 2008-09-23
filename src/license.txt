@@ -1,0 +1,1162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<!-- $Id: kse.html 20883 2008-07-30 19:19:55Z cburmester $ -->
+<title>Sourceforge - Krugle Code Search for Developers</title>
+<meta name="description" content="Open Source Code, Project and Technical Pages Search for Developers." />
+<script language="javascript" type="text/javascript" src="/js/browserfixes.js?mt=1167437917"></script>
+<link rel="stylesheet" type="text/css" href="/media/css/main.css?mt=1197919908" />
+<!--[if IE 6]><link rel="stylesheet" type="text/css" href="/media/css/main_ie6.css?mt=1191871750" /><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" type="text/css" href="/media/css/main_ie7.css?mt=1175467879" /><![endif]-->
+<link rel="stylesheet" type="text/css" href="/media/css/landing.css?mt=1191871750" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="krugle - code" href="http://www.krugle.com/downloads/krugle-code.xml" />
+<link rel="search" type="application/opensearchdescription+xml" title="krugle - tech pages" href="http://www.krugle.com/downloads/krugle-pages.xml" />
+<link rel="search" type="application/opensearchdescription+xml" title="krugle - projects" href="http://www.krugle.com/downloads/krugle-projects.xml" />
+
+<script language="javascript" type="text/javascript" src="/js/conf.js?mt=1192128107"></script>
+<script language="javascript" type="text/javascript" src="/js/utilities.js?mt=1191871751"></script>
+<script language="javascript" type="text/javascript" src="/js/json.js?mt=1175467879"></script>
+<script language="javascript" type="text/javascript" src="/js/net.js?mt=1191871751"></script>
+<script language="javascript" type="text/javascript" src="/js/search.js?mt=1216162509"></script>
+<script language="javascript" type="text/javascript" src="/js/tree.js?mt=1191871751"></script>
+<script language="javascript" type="text/javascript" src="/js/tags.js?mt=1197919908"></script>
+<script language="javascript" type="text/javascript" src="/js/tab.js?mt=1196356344"></script>
+<script language="javascript" type="text/javascript" src="/js/drag.js?mt=1166581611"></script>
+<script language="javascript" type="text/javascript" src="/js/Log.js?mt=1191871751"></script>
+<script language="javascript" type="text/javascript" src="/js/dialogs.js?mt=1191871751"></script>
+<script language="javascript" type="text/javascript" src="/js/auth.js?mt=1191959850"></script>
+<script language="javascript" type="text/javascript" src="/js/support.js?mt=1191871751"></script>
+<script language="javascript" type="text/javascript" src="/js/history/EventManager.js?mt=1191871751"></script>
+<script language="javascript" type="text/javascript" src="/js/history/History.js?mt=1191871751"></script>
+<script language="javascript" type="text/javascript" src="/js/kse.js?mt=1197919908"></script>
+<script language="javascript" type="text/javascript" src="/js/highlight.js?mt=1187723575"></script>
+<script language="javascript" type="text/javascript" src="/js/licenses.js?mt=1191871751"></script>
+
+<script language="javascript" type="text/javascript">
+//<![CDATA[
+krugle.conf.mode = "public";
+krugle.conf.authRequired = false;
+krugle.auth.userName = "anonymous";
+krugle.auth.userAuth = "dCZPG00i2hbCiPD30R5YCf3IiHQ3D";
+krugle.auth.clientName = "kwse";
+krugle.auth.clientAuth = "X4sTyY1chRrYcRRzHirGPzbA52BQ3D";
+krugle.auth.userEmail = "invalid@krugle.com";
+krugle.partnerId = "sourceforge";
+
+krugle.auth.openAPI.userName = "";
+krugle.auth.openAPI.userAuth = "";
+krugle.auth.openAPI.clientName = "kwse";
+krugle.auth.openAPI.clientAuth = "";
+
+krugle.hub = {};
+
+
+krugle.kse.postEvent = {};
+krugle.kse.postEvent.event = decodeURIComponent("");
+krugle.kse.postEvent.eventID = decodeURIComponent("");
+krugle.kse.postEvent.pageName = decodeURIComponent("");
+
+// set onresize handler for the window
+window.onresize = onWindowResize;
+//]]>
+</script>
+</head>
+<body onload="onDocumentLoad();">
+
+<!-- Sourceforge Partner Specific KSE Page Elements and Styles -->
+
+<link rel="stylesheet" type="text/css" href="/media/css/conf/sourceforge.css?mt=1197919908"/>
+<script language="javascript" type="text/javascript" src="/js/init/sourceforge.js?mt=1202422460"></script>
+
+<style type="text/css">
+	<!--
+	@import url( "/media/css/sourceforge.css?mt=1173316974" );
+	-->
+	#mainnav{
+		top:-50px;
+	}
+	.nav{
+		text-align:left;
+	}
+</style>
+
+<!--[if IE]><link rel="stylesheet" type="text/css" media="screen" href="/media/css/sourceforge_ie.css?mt=1187723575"  /><![endif]-->
+
+<!-- 
+<script type="text/javascript" src="/js/sourceforge/jquery.js"></script>
+<script type="text/javascript" src="/js/sourceforge/goods.js"></script>
+<script type="text/javascript" src="/js/sourceforge/sfx.js"></script>
+ -->
+
+<a href="http://sourceforge.net/" style="text-decoration:none;cursor:pointer;">
+	<script type="text/javascript">
+		function isIE6() {
+			var rv = false;
+			// Return value assumes failure
+			if (navigator.appName == 'Microsoft Internet Explorer')
+			{
+				var ua = navigator.userAgent;
+				var re = new RegExp("MSIE (6{1,}[\.0-9]{0,})");
+				if (re.exec(ua) !== null) {
+					rv = parseFloat(RegExp.$1);
+				}
+			}
+			return rv;
+		}
+		function help_window(helpurl) {                                                                                                                                                                                                                     
+			HelpWin = window.open('http://sourceforge.net' + helpurl, 'HelpWindow', 'scrollbars=yes,resizable=yes,toolbar=no,height=400,width=400');
+		}
+
+		if (isIE6()) {
+			document.write('<div style="position:absolute; top:4px; left:0; z-index:1001;width:201;height:54px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale src=\'/media/img/sourceforge/sfx/sfx_logo3.png\');">&nbsp;</div>');
+		} else {
+			document.write('<img style="position:absolute; top:4px; left:0px; z-index:1001;" src="/media/img/sourceforge/sfx/sfx_logo3.png" height="54" width="201" border="0" alt="krugle" />');
+		}
+
+		if (isIE6()) {
+			document.write('<div style="position:absolute; top:67px; right:-1px; z-index:9;width:192px;height:46px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale src=\'/media/img/logo_krugle_poweredby_searchbar2.png\');">&nbsp;</div>');
+		}else {
+			document.write('<img style="position:absolute; top:67px; right:0; z-index:9;" src="/media/img/logo_krugle_poweredby_searchbar2.png" width="192" height="46" border="0" alt="krugle" />');
+		}
+	</script>
+</a>
+
+<!-- 
+<div id="sourceforge" align="center">
+	<div id="masthead">
+	</div>
+	<div id="mainnav">
+		<div class="firstwave">
+			<ul class="nav">
+				<li class="begin">
+					<a href="http://sourceforge.net/">SF.net</a>
+					<ul>
+						<iframe></iframe>
+						<li class="begin"><a href="http://sourceforge.net/">Home</a></li>
+						<li class=""><a href="http://sourceforge.net/docs/about">About</a></li>
+						<li><a href="http://sourceforge.net/supporters.php">Supporters</a></li>
+						<li><a href="http://sourceforge.net/news/?group_id=141424">Site&nbsp;News</a></li>
+						<li><a href="http://sourceforge.net/register/">Create&nbsp;Project</a></li>
+						<li><a href="http://sourceforge.net/subscribe/">Subscribe</a></li>
+						<li><a href="http://newsletters.ostg.com/wws/subrequest/sourceforge-daily">Newsletter</a></li>
+						<li><a href="http://sourceforge.net/docs/compile_farm">Compile&nbsp;Farm</a></li>
+
+					</ul>
+				</li>
+				<li class="">
+					<a href="http://sourceforge.net/softwaremap/">Projects</a>
+					<ul>
+						<iframe></iframe>
+						<li class="begin"><a href="http://sourceforge.net/softwaremap/">Software&nbsp;Map</a></li>
+						<li><a href="http://sourceforge.net/register/">Create&nbsp;Project</a></li>
+						<li><a href="http://sourceforge.net/new/">New&nbsp;Releases</a></li>
+						<li><a href="http://sourceforge.net/top/mostactive.php?type=week">Top&nbsp;Projects</a></li>
+						<li><a href="http://sourceforge.net/new/new_projects.php">New&nbsp;Projects</a></li>
+						<li><a href="http://sourceforge.net/people/">Help&nbsp;Wanted</a></li>
+
+					</ul>
+				</li>
+				<li class="">
+					<a href="http://sourceforge.net/my/">My Page</a>
+					<ul>
+						<iframe></iframe>
+						<li class="begin"><a href="http://sourceforge.net/my/">Summary</a></li>
+						<li><a href="http://sourceforge.net/my/myprojects.php">Projects</a></li>
+						<li><a href="http://sourceforge.net/my/tracker.php">Tracker</a></li>
+						<li><a href="http://sourceforge.net/my/task.php">Tasks</a></li>
+						<li><a href="http://sourceforge.net/my/donations.php">Donations</a></li>
+						<li><a href="http://sourceforge.net/account/">Preferences</a></li>
+
+					</ul>
+				</li>
+				<li class="">
+					<a href="http://sourceforge.net/support/getsupport.php">Help</a>
+					<ul>
+						<iframe></iframe>
+						<li class="begin"><a href="http://sourceforge.net/support/getsupport.php">Get&nbsp;Support</a>
+						</li>
+						<li><a href="http://sourceforge.net/docman/?group_id=1">Documentation</a></li>
+						<li><a href="http://sourceforge.net/docs/A03/">Site&nbsp;Updates</a></li>
+						<li><a href="http://sourceforge.net/support/priority.php"
+						       class="subscribe">Priority&nbsp;Support</a></li>
+						<li><a href="http://sourceforge.net/docs/A04">Site&nbsp;Status</a></li>
+
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+-->
+<!--
+	<div id="kahuna">
+		<form action="/search/" method="get" name="searchform">
+			<input name="type_of_search" value="soft" type="hidden">
+			<fieldset>
+				<legend>Search</legend>
+				<label>Search SourceForge.net Projects </label><input value="" id="searchbox" name="words" tabindex="1"
+				                                                      type="text"><input value="Search"
+				                                                                         id="searchsubmit"
+				                                                                         tabindex="0" type="submit">&nbsp;&nbsp;<a
+					href="http://sourceforge.net/search/" class="advanced">Advanced</a>
+			</fieldset>
+		</form>
+	</div>
+-->
+<!-- 
+</div>
+ -->
+
+
+<div id="top_links">
+<a href="/menus/support.html" onclick="krugle.kse.showSupportMenu();return false;" id="_support_menu">Support <img src="/media/img/menu_arrow.gif" align="top" border="0" height="8" width="9"  /></a>
+<a href="/usersettings/" onmouseover="return true;" onclick="krugle.kse.loadUserSettings('/');return false;">MyKrugle</a>
+<a href="/feedback.html" onmouseover="return true;" onclick="krugle.kse.logEvent(krugle.log.kseFeedbackLink);krugle.support.showFeedback('','');return false;">Feedback</a>
+<span id="tl_signin"><a href="/" onmouseover="return true;" onclick="krugle.auth.showSignin();return false;" style="border:0;">Sign In</a></span>
+</div>
+
+
+<div id="progress" style="visibility:hidden;"><img src="/media/img/progress_bar.gif"  border="0" height="8" width="122" /></div>
+
+<div id="kse_banner"><!-- KSE Banner Space --></div>
+
+<noscript>
+<img src="/media/img/tp.gif" height="40" width="2" border="0"  />
+<center>
+<div align="left" style="width:600px;">
+<h1 style="color:#FF0000">Krugle Search Requires JavaScript</h1>
+<p>Krugle search applications are AJAX enabled and require that your browser have
+scripting enabled and JavaScript support. Your browser either does not support JavaScript,
+or it has JavaScript support disabled. Please enable JavaScript support or use a different
+browser with JavaScript support to use Krugle search.</p>
+</div>
+</center>
+</noscript>
+	
+<!-- hide until we know, on load, that JavaScript is enabled, then show -->
+<div id='kse_elements' style='visibility:hidden;'>
+
+	<form name="searchForm" action="/kse/files" onsubmit="krugleSearch.startSearch();krugle.kse.logEvent(krugle.log.kseSearchSubmit);return false;">
+	<div id="search_channel">
+	<table cellspacing="0" cellpadding="0" border="0" width="100%">
+	<tr align="left" valign="middle">
+	<td height="44"><img src="/media/img/tp.gif" height="2" width="8" border="0"  id="search_channel_left_spacer"/></td>
+	<td nowrap="nowrap">
+		<span class="control_label">
+		&nbsp;<br />
+		<input name="query" value="" type="text" class="box" style="width:190px;" size="20" maxlength="512" />
+		</span>
+	</td>
+	<td nowrap="nowrap">
+		<span class="control_label">
+		&nbsp;<br />
+		&nbsp;<input type="submit" value="Search" />&nbsp;
+		</span>
+	</td>
+	<td nowrap="nowrap">
+		<span class="control_label">
+		<span id="lang" style="display:none;">
+		&nbsp;Language:<br />
+		<select class="control" name="lang">
+			<option value="" selected="selected">All</option>
+			<option value="actionscript">ActionScript</option>
+			<option value="ada">Ada</option>
+			<option value="applescript">AppleScript</option>
+			<option value="asp">ASP</option>
+			<option value='asp.net'>ASP .NET</option>
+			<option value='aspectj'>AspectJ</option>
+			<option value="assembly">Assembly</option>
+			<option value="awk">Awk</option>
+			<option value="basic">BASIC</option>
+			<option value="c">C</option>
+			<option value="c++">C++</option>
+			<option value="c#">C#</option>
+			<option value="coldfusion">ColdFusion</option>
+			<option value="lisp">Common Lisp</option>
+			<option value="css">CSS</option>
+			<option value="eiffel">Eiffel</option>
+			<option value="elisp">Emacs Lisp</option>
+			<option value="erlang">Erlang</option>
+			<option value="expect">Expect</option>
+			<option value='forth'>Forth</option>
+			<option value="fortran">Fortran</option>
+			<option value='groovy'>Groovy</option>
+			<option value="haskell">Haskell</option>
+			<option value='idl'>IDL</option>
+			<option value="java">Java</option>
+			<option value="javascript">JavaScript</option>
+			<option value="jsp">JSP</option>
+			<option value="lex">Lex/Flex</option>
+			<option value="lua">Lua</option>
+			<option value='matlab'>MATLAB</option>
+			<option value="ml">ML</option>
+			<option value='modula'>Modula</option>
+			<option value="objectivec">Objective C</option>
+			<option value="pascal">Pascal/Delphi</option>
+			<option value="perl">Perl</option>
+			<option value="php">PHP</option>
+			<option value='prolog'>Prolog</option>
+			<option value="python">Python</option>
+			<option value='rexx'>Rexx</option>
+			<option value="ruby">Ruby</option>
+			<option value="scheme">Scheme</option>
+			<option value="shell">Shell Script</option>
+			<option value="sql">SQL</option>
+			<option value="tcl">Tcl</option>
+			<option value="vhdl">VHDL</option>
+			<option value='vb'>Visual Basic</option>
+			<option value="vb.net">VB .NET</option>
+			<option value="vbscript">VBScript</option>
+			<option value="xml">XML</option>
+			<option value="yacc">Yacc/Bison</option>
+		</select>&nbsp;
+		</span>
+		</span>
+	</td>
+	<td nowrap="nowrap">
+		<span class="control_label">
+		<span id="lang_pr" style="display:none;">
+		&nbsp;Language:<br />
+		<select class="control" name="lang_pr">
+			<option value='' selected="selected">All</option>
+			<option value='actionscript'>ActionScript</option>
+			<option value='ada'>Ada</option>
+			<option value='applescript'>AppleScript</option>
+			<option value='asp'>ASP</option>
+			<option value='asp.net'>ASP .NET</option>
+			<option value='aspectj'>AspectJ</option>
+			<option value='assembly'>Assembly</option>
+			<option value='awk'>Awk</option>
+			<option value='basic'>BASIC</option>
+			<option value='c'>C</option>
+			<option value='c++'>C++</option>
+			<option value='c#'>C#</option>
+			<option value='cobol'>COBOL</option>
+			<option value='coldfusion'>ColdFusion</option>
+			<option value='lisp'>Common Lisp</option>
+			<option value="css">CSS</option>
+			<option value='d'>D</option>
+			<option value='dylan'>Dylan</option>
+			<option value='eiffel'>Eiffel</option>
+			<option value='elisp'>Emacs Lisp</option>
+			<option value='erlang'>Erlang</option>
+			<option value='euphoria'>Euphoria</option>
+			<option value='forth'>Forth</option>
+			<option value='fortran'>Fortran</option>
+			<option value='groovy'>Groovy</option>
+			<option value='haskell'>Haskell</option>
+			<option value='idl'>IDL</option>
+			<option value='java'>Java</option>
+			<option value='javascript'>JavaScript</option>
+			<option value='jsp'>JSP</option>
+			<option value='labview'>LabVIEW</option>
+			<option value='lex'>Lex/Flex</option>
+			<option value='lpc'>LPC</option>
+			<option value='lua'>Lua</option>
+			<option value='matlab'>MATLAB</option>
+			<option value='ml'>ML</option>
+			<option value='modula'>Modula</option>
+			<option value='mumps'>MUMPS</option>
+			<option value='oberon'>Oberon</option>
+			<option value='objectivec'>Objective C</option>
+			<option value='pascal'>Pascal/Delphi</option>
+			<option value='perl'>Perl</option>
+			<option value='php'>PHP</option>
+			<option value='pike'>Pike</option>
+			<option value='progress'>PROGRESS</option>
+			<option value='prolog'>Prolog</option>
+			<option value='python'>Python</option>
+			<option value='rebol'>REBOL</option>
+			<option value='rexx'>Rexx</option>
+			<option value='ruby'>Ruby</option>
+			<option value='s'>S/R</option>
+			<option value='scheme'>Scheme</option>
+			<option value='shell'>Shell Script</option>
+			<option value='smalltalk'>Smalltalk</option>
+			<option value='sql'>SQL</option>
+			<option value='tcl'>Tcl</option>
+			<option value='vhdl'>VHDL</option>
+			<option value='vb'>Visual Basic</option>
+			<option value='vb.net'>VB .NET</option>
+			<option value='vbscript'>VBScript</option>
+			<option value='vfpro'>Visual FoxPro</option>
+			<option value='xml'>XML</option>
+			<option value='yacc'>Yacc/Bison</option>
+		</select>&nbsp;
+		</span>
+		</span>
+	</td>
+	<td nowrap="nowrap">
+		<span class="control_label">
+		<span id="findin" style="display:none;">
+		&nbsp;Found in:<br />
+		<select class="control" name="findin">
+			<option value="" selected="selected">Any area</option>
+			<option value="comment">Comments</option>
+			<option value="code">Source code</option>
+			<option value="doc">Documents</option>
+			<option value="functiondef">Function definition</option>
+			<option value="functioncall">Function call</option>
+			<option value="classdef">Class definition</option>
+		</select>&nbsp;
+		</span>
+		</span>
+	</td>
+	<td nowrap="nowrap">
+		<span class="control_label">
+		<span id="project" style="display:none;">
+		&nbsp;Project:
+		<span id="lookahead_link">[<a href="" onclick="krugle.kse.logEvent(krugle.log.kseShowAllProjectsLink);return krugle.lookahead.Lookahead.fetchAllProjectsList();">Show All</a>]</span>
+		<br />
+		<input style="width:100px;" type="text" value="" size="80" name="project" />&nbsp;
+		</span>
+		</span>
+	</td>
+	<td nowrap="nowrap">
+		<span class="control_label">
+		<span id="license" style="display:none;">
+		&nbsp;License:<br />
+		<select name="license" class="control">
+			<option selected="selected" value="">All</option>
+			<option value="adaptive">Adaptive-1.0</option>
+			<option value="academic">AFL</option>
+			<option value="apache11">Apache</option>
+			<option value="apache10">Apache-1.0</option>
+			<option value="apache20">Apache-2.0</option>
+			<option value="apple">Apple</option>
+			<option value="artistic">Artistic</option>
+			<option value="atlassian">Atlassian</option>
+			<option value="attribution">Attribution</option>
+			<option value="bsd">BSD</option>
+			<option value="ca11">CA-1.1</option>
+			<option value="cddl">CDDL-1.0</option>
+			<option value="cpl">Common-1.0</option>
+			<option value="cua_office">CUA-1.0</option>
+			<option value="eclipse">Eclipse</option>
+			<option value="ecl">Educational</option>
+			<option value="eiffel">Eiffel-1.0</option>
+			<option value="eiffel20">Eiffel-2.0</option>
+			<option value="entessa">Entessa</option>
+			<option value="eu_datagrid">EU-DataGrid</option>
+			<option value="fair">Fair</option>
+			<option value="frameworx">Frameworx</option>
+			<option value="freebsd">FreeBSD</option>
+			<option value="gfdl">GFDL</option>
+			<option value="gpl2">GPL-2.0</option>
+			<option value="glgpl20">GPL-Library-2.0</option>
+			<option value="historical">Historical</option>
+			<option value="ibm">IBM</option>
+			<option value="intel">Intel</option>
+			<option value="jabber">Jabber</option>
+			<option value="lppl">LaTeX</option>
+			<option value="lgpl21">LGPL-2.1</option>
+			<option value="lucent">Lucent-1.02</option>
+			<option value="mscl">Microsoft-Community</option>
+			<option value="mslpl">Microsoft-LP</option>
+			<option value="mspl">Microsoft-Permissive</option>
+			<option value="msrl">Microsoft-Reference</option>
+			<option value="msss">Microsoft-Shared</option>
+			<option value="msvs">Microsoft-VS-SDK</option>
+			<option value="mit">MIT</option>
+			<option value="mitre">MITRE</option>
+			<option value="motorola">Motorola</option>
+			<option value="motosoto">Motosoto</option>
+			<option value="mozilla10">Mozilla-1.0</option>
+			<option value="mozilla11">Mozilla-1.1</option>
+			<option value="nasa13">NASA-1.3</option>
+			<option value="naumen">Naumen</option>
+			<option value="ncsa">NCSA</option>
+			<option value="nethack">Nethack</option>
+			<option value="nokia">Nokia</option>
+			<option value="none">None</option>
+			<option value="oclc20">OCLC-2.0</option>
+			<option value="opengroup">OpenGroup</option>
+			<option value="osiapproved">OSI-Approved</option>
+			<option value="osl30">OSL</option>
+			<option value="other">Other</option>
+			<option value="php">PHP</option>
+			<option value="public_domain">PublicDomain</option>
+			<option value="ppl">PythonCNRI</option>
+			<option value="psfl">PythonSFL</option>
+			<option value="qt">QPL</option>
+			<option value="realnetworks">RealNetworks-1.0</option>
+			<option value="rpl">Reciprocal</option>
+			<option value="ricoh">Ricoh</option>
+			<option value="scsl">SCSL</option>
+			<option value="sissl">SISSL</option>
+			<option value="sleepycat">Sleepycat</option>
+			<option value="sun">SPL</option>
+			<option value="sybase">Sybase-1.0</option>
+			<option value="vovida">Vovida-1.0</option>
+			<option value="w3c">W3C</option>
+			<option value="wxwindows">wxWindows</option>
+			<option value="xnet">X.Net</option>
+			<option value="ximian">Ximian</option>
+			<option value="zll">zlib</option>
+			<option value="zope">Zope</option>
+		</select>&nbsp;
+		</span>
+		</span>
+	</td>
+	<td><span id="site" style="display:none;"><input name="site" type="hidden" /></span></td>
+	<td width="100%"><span id="host" style="display:none;"><input name="host" type="hidden" /></span></td>
+	</tr>
+	</table>
+	</div>
+	</form>
+
+	<ul id="search_tabs">
+	</ul>	
+
+	<div id="content" style="visibility:hidden;">
+		<div id="content_tabs"></div>
+		<div id="content_pane"></div>
+	</div>
+	
+	<div id="directory" style="visibility:hidden;">
+		<div id="dir_tabs"></div>
+		<div id="dir_pane">
+			<div id="dir_scroll" class="content"></div>
+		</div>
+	</div>
+	
+	<a id="btn_dir" style="position:absolute; bottom:40px; right:0px; z-index:100; visibility:hidden;"
+		href="" onmouseover="return true;" onclick="showDirectory();return false;"
+		title="show/hide the directory view"><img id="btn_dir_img" src="/media/img/dir_open.gif"  border="0" height="66" width="7" /></a>
+
+	<!-- the landing splash screen -->
+	<div id="splash" style="z-index:10;">
+		<style type="text/css">
+		<!--
+		#ld_top	{height:220px;}
+		-->
+		</style>
+
+		<script language="javascript" type="text/javascript" src="/js/landing/partners.js?mt=1191871751"></script>
+
+		<div id="ld_frame">
+			<img class="ld_up_pointer" src="/media/img/landing/pointer.gif"  height="27" width="53" border="0" />
+			<div id="ld_top">
+				<img id="ld_headline" style="position:relative;top:69px;left:39px;" src="/media/img/tp.gif" alt="Krugle Code and Project Search" />
+				<div id="ld_headline_text" style="position:relative;top:25px;left:39px;"></div>
+			</div>
+			<div id="ld_middle">
+				<div id="ld_middle_right">
+					<a href="http://www.krugle.com/demos/Overview6.html" title="Watch the Krugle Demo.">
+						<span style="color:#AAA;">Watch:</span><br />
+						The Krugle Demo
+						<img style="position:absolute;bottom:7px;right:-9px;"
+							src="/media/img/landing/pointer_right.gif"  height="11" width="6" border="0" />
+					</a>
+				</div>
+				<div id="ld_middle_left">
+					<div><span style="font-size:16px;">&nbsp;Recent Top Code Searches:</span></div>
+					<div id="ld_top_searches" style="margin-top:8px;">
+					</div>
+				</div>
+			</div>
+			<div id="ld_bottom">
+				<div style="float:right;width:450px;text-align:right;">
+					<a href="http://visitor.constantcontact.com/optin.jsp?m=1101438899746" title="join our newsletter" id="newsletter_link_open" style="position:relative;" onclick="return krugle.kse.landing.showJoinMessage();">&raquo; join our newsletter</a>
+					<a href="http://www.krugle.com/product/getplugins" title="grab a plug-in">&raquo; grab a plug-in</a>
+				</div>
+				<a href="/usersettings/register.jsp"
+					onclick="krugle.auth.loadRegistration(krugle.auth.regTargetUrl);return false;"
+					title="Register for MyKrugle"><b>&raquo; Register for MyKrugle</b></a>
+				<div id="newsletter" align="left">
+					<a href="http://visitor.constantcontact.com/optin.jsp?m=1101438899746" title="join our newsletter" id="newsletter_link_close" onclick="return krugle.kse.landing.hideJoinMessage();">&laquo; join our newsletter</a>
+					<form name="ccoptin" action="http://ui.constantcontact.com/d.jsp" target="_blank" method="post" style="margin:0;" onsubmit="if(this.ea.value == 'Your email address'){this.ea.value='';};">
+						<input type="text" name="ea" size="20" value="Your email address"
+							   style="font-family: verdana, arial, sans-serif;width:120px;"
+							   onfocus="this.value=''"/>
+						<input type="submit" name="go" value="GO" style="font-family: verdana, arial, sans-serif;" onclick="krugle.kse.landing.hideJoinMessage();"/>
+						<input type="hidden" name="m" value="1101438899746"/>
+						<input type="hidden" name="p" value="oi"/>
+					</form>
+				</div>
+			</div>
+			
+			<div id="ld_footer">
+				<div style="float:right;width:450px;text-align:right;">
+					<a class="ul" href="http://blog.krugle.com/">Blog</a>&nbsp;&nbsp;
+					<a class="ul" href="/examples/">Example Searches</a>&nbsp;&nbsp;
+					<a class="ul" href="http://www.krugle.com/legal/terms_of_use.html">Terms of Use</a>&nbsp;&nbsp;
+					<a class="ul" href="http://www.krugle.com/legal/privacy.html">Privacy Policy</a>
+				</div>
+				&copy; 2007 Krugle, Inc.&nbsp;
+			</div>
+		</div>
+
+	</div>
+	
+	
+</div>
+
+
+<!-- read only DOM fragments for using in generating modal window dialogs -->
+<div id="addtagform" style="display:none;">
+	<table cellspacing="5" cellpadding="0" border="0">
+	<tr align="left" valign="middle">
+		<td><label>Title: </label></td>
+		<td>
+			<input style="width:340px;" type="text" size="20" maxlength="255" name="title" />
+		</td>
+	</tr>
+	<tr align="left" valign="middle">
+		<td><label>Tags: </label></td>
+		<td>
+			<input style="width:340px;" type="text" size="20" maxlength="255" name="tags" />
+		</td>
+	</tr>
+	<tr align="left" valign="middle">
+	<td></td>
+	<td><span class="help_text_sm">(Use tags to provide context for your note. Separate tags by spaces.)</span></td>
+	</tr>
+	<tr align="left" valign="top">
+	<td colspan="2"><span class="normal">
+		&nbsp;<br />
+		Which part of the file do you want to add this note to?<br />
+		<input type="radio" name="type" value="0" />The selected line(s)<br />
+		<input type="radio" name="type" value="1" checked="checked" />The entire file<br />
+		&nbsp;</span>
+	</td>
+	</tr>
+	<tr align="left" valign="top">
+	<td><label>Notes: </label></td>
+	<td><textarea style="width:340px;" name="note" cols="40" rows="12"></textarea><br /></td>
+	</tr>
+	<tr align="left" valign="top">
+	<td><label>Options: </label></td>
+	<td><span class="normal">
+		<input type="checkbox" name="makepublic" value="1" checked="checked" />Make this note public</span>
+	</td>
+	</tr>
+	</table>
+</div>
+
+<!-- read only DOM fragments for using in generating modal window dialogs -->
+<div id="_template_enterprise_addnoteform" style="display:none;">
+	<table cellspacing="5" cellpadding="0" border="0">
+	<tr align="left" valign="middle">
+		<td><label>Title: </label></td>
+		<td>
+			<input style="width:340px;" type="text" size="20" maxlength="255" name="title" />
+		</td>
+	</tr>
+	<tr align="left" valign="middle">
+		<td><label>Tags: </label></td>
+		<td>
+			<input style="width:340px;" type="text" size="20" maxlength="255" name="tags" />
+		</td>
+	</tr>
+	<tr align="left" valign="middle">
+	<td></td>
+	<td><span class="help_text_sm">(Use tags to provide context for your note. Separate tags by spaces.)</span></td>
+	</tr>
+	<tr align="left" valign="top">
+	<td colspan="2"><span class="normal">
+		&nbsp;<br />
+		Which part of the file do you want to add this note to?<br />
+		<input type="radio" name="type" value="0" />The selected line(s)<br />
+		<input type="radio" name="type" value="1" checked="checked" />The entire file<br />
+		&nbsp;</span>
+	</td>
+	</tr>
+	<tr align="left" valign="top">
+	<td><label>Notes: </label></td>
+	<td><textarea style="width:340px;" name="note" cols="40" rows="12"></textarea><br /></td>
+	</tr>
+	</table>
+	<input type="hidden" name="makepublic" value="0" />
+</div>
+
+<div id="addcontenttagform" style="display:none;">
+	<label class="align">Title: </label><input style="width:270px;" type="text" size="20" name="title" />
+	<input type="radio" name="type" value="1" checked="checked" style="visibility:hidden;" />The entire content page<br />
+	<br />&nbsp;<br />
+	<label class="align">Notes: </label><textarea style="width:270px;" name="note" cols="40" rows="5"></textarea>
+</div>
+
+<div id="displaytaginfo" style="display:none;">
+	<table cellspacing="5" cellpadding="0" border="0">
+	<tr align="left" valign="middle">
+		<td><label>Title:</label></td>
+		<td width="100%"><span class="normal" id="dti_title"></span></td>
+	</tr>
+	<tr align="left" valign="middle">
+		<td><label>Author:</label></td>
+		<td><span class="normal" id="dti_user"></span></td>
+	</tr>
+	<tr align="left" valign="middle">
+		<td><label>Created:</label></td>
+		<td><span class="normal" id="dti_date"></span></td>
+	</tr>
+	<tr align="left" valign="middle">
+		<td><label>Tags:</label></td>
+		<td><span class="normal" id="dti_tags"></span></td>
+	</tr>
+	<!--tr align="left" valign="middle">
+		<td><label>URL:</label></td>
+		<td><span class="normal" id="dti_url"></span></td>
+	</tr-->
+	<tr align="left" valign="top">
+		<td><label>Description:</label></td>
+		<td>
+			<div id="dti_note" style="height:180px; padding:4px; border:1px solid #CCC; overflow:auto; background-color:#EFEFEF;"></div>
+		</td>
+	</tr>
+	<tr align="left" valign="top">
+		<td colspan="2"><span class="normal">
+		<br />
+		Showing note <b><span id="dti_start"></span></b> of <b><span id="dti_end"></span></b>.<br />
+		<span id="dti_next_prev_links">
+		</span>
+		</span>
+		</td>
+	</tr>
+	</table>
+</div>
+
+<div id="searchselectedform" style="display:none;">
+
+	<input type="hidden" name="project" />
+	<input type="hidden" name="stream" />
+	<table cellspacing="5" cellpadding="0" border="0">
+	<tr align="left" valign="top">
+		<td><label>Keywords: </label></td>
+		<td>
+			<input style="width:270px;" type="text" size="20" name="keywords" />
+		</td>
+	</tr>
+	<tr align="left" valign="top">
+		<td><label>Found In: </label></td>
+		<td>
+			<input type="radio" name="type" value="0" checked="checked" />Any Area<br />
+			<input type="radio" name="type" value="1" />Comments<br />
+			<input type="radio" name="type" value="2" />Source code<br />
+			<input type="radio" name="type" value="3" />Documents<br />
+			<input type="radio" name="type" value="4" />Function definition<br />
+			<input type="radio" name="type" value="5" />Function call<br />
+			<input type="radio" name="type" value="6" />Class definition<br />
+		</td>
+	</tr>
+	<tr align="left" valign="top">
+		<td><label>Where to search: </label></td>
+		<td>
+			<input type="radio" name="search" value="project" checked="checked"/>Current Project Files<br />
+			<input type="radio" name="search" value="code" />Code Files<br />
+		</td>
+	</tr>
+	</table>
+	<br />&nbsp;<br />
+</div>
+
+<div id="_template_codespace_link" style="display:none;">
+	<p><b>Share</b> this Codespace (current Krugle results) with colleagues.</p>
+	
+	<p><b>Save</b> this Codespace in your browser bookmarks for future reference.</p>
+	
+	<p><a href="__URL__" title="Krugle Codespace Link">__URL__</a></p>
+	
+	<p>Right-click (or Ctrl-click) the link above to copy the URL or to bookmark
+	the Codespace in your browser.</p>
+	
+	<p>Click the Codespace link above to load it into your current browser window.</p>
+</div>
+
+<div id="_template_resultsonly_link" style="display:none;">
+	<p>Here is an external URL that will regenerate the current Search Results.</p>
+	
+	<p><a href="__URL__" title="Krugle Search Results Link">__URL__</a></p>
+	
+	<p>Right-click (or Ctrl-click) the link above to copy the URL or to bookmark
+	the link in your browser.</p>
+	
+	<p>Click the link above to load into your current browser window.</p>
+	
+	<p>You can create a Krugle <b>Codespace</b> link - a link to multiple tabs. Simply open
+	one or more code files, tech pages, or project descriptions and click the "Create
+	Link" button.</p>
+</div>
+
+<div id="_feature_presentation" style="display:none;">
+	<style type="text/css" media="all">
+	<!--
+	#fp td
+	{
+		color: #000;
+		font: 11px arial,sans-serif;
+	}
+	#fp td.frame
+	{
+		border: 1px solid #000;
+		width: 300px;
+	}
+	#fp td.spacerColumn
+	{
+		width: 20px;
+	}
+	#fp span.title
+	{
+		font: bold 15px arial,sans-serif;
+	}
+	#fp span.helpText
+	{
+		font: italic 10px arial,sans-serif;
+	}
+	#fp span.example
+	{
+		color: #999;
+		font: bold 12px times,serif;
+	}
+	-->
+	</style>
+	<div id="fp">
+	<table cellspacing="0" cellpadding="0" border="0">
+	<tr align="left" valign="top">
+	<td class="frame">
+	
+		<table cellspacing="0" cellpadding="10" border="0">
+		<tr align="left" valign="top">
+		<td colspan="2">
+			<span class="title">Code Search Qualifiers</span><br/>
+			<span class="helpText">Use these to narrow/pinpoint code search results</span>
+		</td>
+		</tr>
+		<tr align="left" valign="top">
+		<td>proj</td>
+		<td>
+			<span class="example">btree proj:alpha</span><br/>
+			finds files containing the term "btree" in the alpha project
+		</td>
+		</tr>
+		<tr align="left" valign="top">
+		<td>lang</td>
+		<td>
+			<span class="example">btree lang:java</span><br/>
+			finds files containing the term "btree" written in the java programming language
+		</td>
+		</tr>
+		<tr align="left" valign="top">
+		<td>filename</td>
+		<td>
+			<span class="example">btree filename:"*.h"</span><br/>
+			finds files with the .h extension that contain the term btree
+		</td>
+		</tr>
+		<tr align="left" valign="top">
+		<td>site</td>
+		<td>
+			<span class="example">btree site:src/text/resources</span><br/>
+			finds files that contain the term btree and that have src/text/resources in their file path
+		</td>
+		</tr>
+		<tr align="left" valign="top">
+		<td>comment</td>
+		<td>
+			<span class="example">comment:"btree"</span><br/>
+			finds files that contain the term btree in comments
+		</td>
+		</tr>
+		<tr align="left" valign="top">
+		<td>classdef</td>
+		<td>
+			<span class="example">classdef:btree</span><br/>
+			finds files that contain a class named btree
+		</td>
+		</tr>
+		<tr align="left" valign="top">
+		<td>functiondef</td>
+		<td>
+			<span class="example">functiondef:btree</span><br/>
+			finds files that contain of a function named btree
+		</td>
+		</tr>
+		<tr align="left" valign="top">
+		<td>functioncall</td>
+		<td>
+			<span class="example">functioncall:btree</span><br/>
+			finds files that contain calls to the btree function
+		</td>
+		</tr>
+		<tr align="left" valign="top">
+		<td>"..."</td>
+		<td>
+			<span class="example">"md5 hash"</span><br/>
+			finds files that contain the string "md5 hash"
+		</td>
+		</tr>
+		<tr align="left" valign="top">
+		<td>- <i>(minus)</i></td>
+		<td>
+			<span class="example">"text/xml" -"utf-8"</span><br/>
+			find occurrences where "text/xml" occurs, but "utf-8" does not 
+		</td>
+		</tr>
+		<tr align="left" valign="top">
+		<td><i>combine</i></td>
+		<td>
+			<span class="example">btree filename:"*.conf" site:src/text</span><br/>
+			combine multiple qualifiers to find code files that contain btree in .conf files that have src/text in their filepath
+		</td>
+		</tr>
+		</table>
+	
+	</td>
+	<td class="spacerColumn">&nbsp;</td>
+	<td class="frame">
+		<table cellspacing="0" cellpadding="10" border="0">
+		<tr align="left" valign="top">
+		<td colspan="2">
+			<span class="title">Search Results &amp; Navigation</span><br/>
+			<span class="helpText">Use these to refine, explore and share result files</span>
+		</td>
+		</tr>
+		<tr align="left" valign="top">
+		<td>N,n,K,k</td>
+		<td>
+			move to the next occurrence of the search term that was found in this file
+		</td>
+		</tr>
+		<tr align="left" valign="top">
+		<td>P,p,J,j</td>
+		<td>
+			move to the previous occurrence of the search term that was found in this file
+		</td>
+		</tr>
+		<tr align="left" valign="top">
+		<td><img src="/media/img/icon_numbers.gif" alt="line numbers" /></td>
+		<td>
+			toggles display of line numbers to the left margin of code files
+		</td>
+		</tr>
+		<tr align="left" valign="top">
+		<td><img src="/media/img/icon_save.gif" alt="save file" /></td>
+		<td>
+			save current file to your pc
+		</td>
+		</tr>
+		<tr align="left" valign="top">
+		<td><img src="/media/img/icon_note.gif" alt="add note" /></td>
+		<td>
+			add a note to the current file (selected line)
+		</td>
+		</tr>
+		<tr align="left" valign="top">
+		<td><img src="/media/img/icon_search.gif" alt="search selected text" /></td>
+		<td>
+			find occurrences of the currently selected text
+		</td>
+		</tr>
+		<tr align="left" valign="top">
+		<td><img src="/media/img/icon_directory.gif" alt="line numbers" /></td>
+		<td>
+			displays the interactive code directory that contains the currently displayed code file or project page
+		</td>
+		</tr>
+		<tr align="left" valign="top">
+		<td><img src="/media/img/icon_newwindow.gif" alt="show in separate window" /></td>
+		<td>
+			show hit/resource in separate standalone window
+		</td>
+		</tr>
+		<tr align="left" valign="top">
+		<td colspan="2">
+			<span class="title">Utilities</span><br/>
+			<span class="helpText">Tools to aid code search</span>
+		</td>
+		</tr>
+		<tr align="left" valign="top">
+		<td><img src="/media/img/btn_codespace.gif" width="65" alt="foo" /></td>
+		<td>
+			create a permanent URL reference to the currently open files
+		</td>
+		</tr>
+		<tr align="left" valign="top">
+		<td><img src="/media/img/static/showall.gif" alt="foo" /></td>
+		<td>
+			show all internal projects
+		</td>
+		</tr>
+		<tr align="left" valign="top">
+		<td><img src="/media/img/static/resultstab.gif" alt="foo" /></td>
+		<td>
+			show result summary list 
+		</td>
+		</tr>
+		<tr align="left" valign="top">
+		<td><img src="/media/img/static/hometab.gif" alt="foo" /></td>
+		<td>
+			show code reports and analysis - click "Home" link or logo to open
+		</td>
+		</tr>
+		</table>
+	</td>
+	</tr>
+	</table>
+	</div>
+
+</div>
+
+<span id="dir_info_box"></span>
+
+<div id="pop_menu" style="position:absolute; z-index:1000; visibility:hidden; border:1px solid #000; background-color:#FFF;">
+<!-- IE6 SELECT z-index bug - this iframe dynamically shown if IE6 to hide any underlying SELECT elements -->
+<iframe id="_pm_ie6mask"
+	src=""
+	style="display:block;position:absolute;top:0px;left:0px;width:0px;height:0px;z-index:-1;"
+	frameborder="0" scrolling="no"></iframe>
+<div id="_pm_list"></div>
+</div>
+
+<div id="clickfilter" onclick="krugle.kse.logEvent(krugle.log.kseMenuCancel,{uiType:krugle.menu.menuName});krugle.kse.closeMenu();" style="z-index:999; visibility:hidden; position:absolute; top:0; left:0; width:100%; height:100%;"></div>
+
+<span id="sizing_span" style="visibility:hidden;"></span>
+
+<!-- iframe for AJAX loading when Safari "back" doesn't allow XMLHttpRequest calls -->
+<iframe name="ajax" src="/media/img/tp.gif"
+	frameborder="0" marginwidth="0" marginheight="0" height="0" width="0"
+	scrolling="no" style="visibility:hidden;"></iframe>
+	
+<!-- dialogs.html: Templates and HTML fragments used by the krugle.dialogs (dialogs.js) module -->
+
+<div id="_mw_clickfilter" onclick="return false;" style="z-index:500; visibility:hidden; position:absolute; top:0; left:0; width:100%; height:100%;"></div>
+
+<!-- modal window dialog template -->
+<div id="_mw" class="modalwindow">
+	<!-- IE6 SELECT z-index bug - this iframe dynamically shown if IE6 to hide underlying SELECT elements -->
+	<iframe id="_mw_ie6mask"
+		src="javascript:void 0;"
+		style="display:none;position:absolute;width:100%;height:100%;z-index:-1;"></iframe>
+	<div class='modalwindow_inner'>
+		<div align="left"
+			onmousedown="dragStart(event, '_mw');"
+			style="height:32px;
+			padding:0px 20px 0px 20px;
+			color:#333;
+			font:bold 12px/12px arial,sans-serif;
+			background-image:url(/media/img/tile_mw_title.jpg);"><div id="_mw_title" style="padding-top:8px;">_title_</div></div>
+		<div style="height:100%; padding:14px 20px 14px 20px; background-color:#EFEFEF;">
+			<form name="_mw_form"
+				onsubmit="return krugle.dialogs.submitModalWindow();"
+				action="javascript:krugle.dialogs.hideModalWindow();void 0;">
+			<!-- the form contents get dynamically filled in by the modal window display function -->
+			<div id="_mw_form_contents">_contents_</div>
+			<!-- the form buttons get dynamically filled in by the modal window display function -->
+			<p align="right" id="_mw_form_buttons">_cancel_submit_buttons_</p>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- information (non-modal) window dialog template -->
+<div id="_iw" class="modalwindow">
+	<!-- IE6 SELECT z-index bug - this iframe dynamically shown if IE6 to hide underlying SELECT elements -->
+	<iframe id="_iw_ie6mask"
+		src="javascript:void 0;"
+		style="display:none;position:absolute;width:100%;height:100%;z-index:-1;"></iframe>
+	<div class='modalwindow_inner'>
+		<div align="left"
+			onmousedown="dragStart(event, '_iw');"
+			style="height:32px;
+			padding:0px 20px 0px 20px;
+			color:#333;
+			font:bold 12px/12px arial,sans-serif;
+			background-image:url(/media/img/tile_mw_title.jpg);"><div id="_iw_title" style="padding-top:8px;">_title_</div></div>
+		<div style="height:100%; padding:14px 20px 14px 20px; background-color:#EFEFEF;">
+			<div id="_iw_contents"></div>
+			<p align="right">
+				<input id="_iw_closebutton" name="_iw_close" class="control" type="button" value="_cancel_"
+					onclick="krugle.dialogs.hideInfoWindow();" />
+			</p>
+		</div>
+	</div>
+</div>
+<!-- auth.html: Templates and HTML fragments used by the krugle.auth (auth.js) module -->
+
+<div id="_template_signinform" style="display:none;">
+	Please enter your Krugle username and password to sign in. Sign in is required to use
+	notes functionality, access MyKrugle, or post to the Krugle Forums.
+	<br />&nbsp;<br />
+	If you haven't created a Krugle account, then
+	<a href="/usersettings/register.jsp" onclick="krugle.auth.loadRegistration(krugle.auth.regTargetUrl);return false;">register now</a>.
+	It's quick and easy - all we require is your name and email address.
+	<br />&nbsp;<br />
+	If you have forgotten your username or password, click
+	<a href="" onmouseover="return true;" onclick="krugle.eventLogger.send({event:krugle.log.kseForgotPasswordLink});krugle.support.showForgotPassword(krugle.onForgotPasswordSuccess,krugle.onForgotPasswordCancel);return false;">forgot password</a>
+	to request your username and password.
+	<br />&nbsp;<br />
+	<label class="align">Username: </label><input style="width:200px;" type="text" size="20" maxlength="80" name="username" /><br />
+	<label class="align">Password: </label><input style="width:200px;" type="password" size="20" maxlength="80" name="password" /><br />
+	&nbsp;<br />
+	<input type="checkbox" name="sso" value="yes" />Remember me in this browser<br />
+</div>
+
+<div id="_template_enterprise_signinform" style="display:none;">
+	Enter your local network Username and Password. Signing in to Krugle
+	Enterprise constitutes acceptance of the Krugle Enterprise
+	<a href="http://www.krugle.com/enterprise/legal/terms" target="external">Terms of Use</a>.
+	<br />&nbsp;<br />
+	For assistance, contact your system administrator.
+	<br />&nbsp;<br />
+	<label class="align">Username: </label><input style="width:200px;" type="text" size="20" maxlength="80" name="username" /><br />
+	<label class="align">Password: </label><input style="width:200px;" type="password" size="20" maxlength="80" name="password" /><br />
+	&nbsp;<br />
+	<input type="checkbox" name="sso" value="yes" checked="checked" />Remember me in this browser<br />
+</div>
+
+<!-- Used to pass auth credentials, state, and target url (if any) to mykrugle pages -->
+<form name="krugleStatePostForm" method="post" action="" style="display:none;">
+<input type="hidden" name="_krugleun" value="anonymous" />
+<input type="hidden" name="_krugleua" value="dCZPG00i2hbCiPD30R5YCf3IiHQ3D" />
+<input type="hidden" name="_kruglecn" value="kwse" />
+<input type="hidden" name="_krugleca" value="X4sTyY1chRrYcRRzHirGPzbA52BQ3D" />
+<input type="hidden" name="_oun" value="" />
+<input type="hidden" name="_oua" value="" />
+<input type="hidden" name="_ocn" value="kwse" />
+<input type="hidden" name="_oca" value="" />
+<input type="hidden" name="ksestate" value="" />
+<input type="hidden" name="url" value="" />
+</form>
+
+
+<!-- support.html: Templates and HTML fragments used by the krugle.support (support.js) module -->
+
+<div id="_template_feedbackform" style="display:none;">
+	<label class="align">Your Email: </label>
+	<input type="text" name="email" style="width:270px;" value="" maxlength="200" />
+	<br />&nbsp;<br />
+	<label class="align">Type: </label>
+	<select name="type" style="width:270px;"><option value="" /></select>
+	<br />&nbsp;<br />
+	<label class="align" id="_label_feedback">Feedback: </label>
+	<textarea name="feedback" style="width:270px;" cols="40" rows="14" ></textarea>
+	<br />&nbsp;<br />
+	<div id="_kruglePostFeedback">
+	<input type="checkbox" name="post_public" value="true" checked="checked" />
+	Post this feedback to the <a href="http://forums.krugle.org/" target="_corporate">Krugle Public Forums</a>
+	</div>
+</div>
+
+<div id="_template_forgotpasswordform" style="display:none;">
+	 Enter the email address you registered with below and then click 'Send'.
+	 Your username and a new, random password will be emailed to you.
+	<br />&nbsp;<br />
+	<strong>Important</strong>: You must use the same email address that you
+	used when you first registered.
+	<br />&nbsp;<br />
+	<label class="align">Email: </label><input type="text" maxlength="200" name="email" style="width:270px;"></input>
+</div>
+
+
+
+<!-- trial of leadlander.com - see DADE-3794 -->
+<script type="text/javascript" language="javascript">llactid=13686</script> 
+<script type="text/javascript" language="javascript" src="http://t2.trackalyzer.com/trackalyze.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<erl>
+
+-include("vomp_protocol.hrl").
+
+show_tv_channels() ->
+%%     TODO Servers = vomp_protocol:probe_for_servers(),
+%%     {Address,Port,_Name} = hd(Servers),
+    Address = {192,168,1,92},
+    Port = 3024,
+    {ok,VompChannel} = vomp_channel:create(Address,Port),
+    {ok, _Response1} = vomp_protocol:login(VompChannel),
+    {ok, TvChannels} = vomp_protocol:get_channels(VompChannel),
+    lists:map(fun(TvChannel)->
+		      {tr, [],[{td, [], {a,[{href,pelle}],TvChannel#channel.name}}]} end,TvChannels).
+
+
+out(A) ->
+    [{ssi, "HEAD","%%",[]},
+     {ehtml,
+      [{br},
+      {table, [{bgcolor, "cyan"},{align,"center"}],
+       [
+	show_tv_channels()
+       ]
+      }]
+     } 
+      ,
+     {ssi, "END2",[],[]}].
+
+
+
+
+</erl>
+
+
